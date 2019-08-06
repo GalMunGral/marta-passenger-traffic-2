@@ -1,3 +1,6 @@
+---
+path: /github/marta2-server
+---
 ### 1. Prepare the database
 Make sure MySQL server is running, then start MySQL client from command line:
 ```bash
