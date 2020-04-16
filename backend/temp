@@ -1,0 +1,1336 @@
+
+> backend@1.0.0 test /home/wenqi/marta2-server/backend
+> ./tests/test-api.sh
+
+POST /login { username, password }
+{
+    "success": true,
+    "userType": "ADMIN"
+}
+
+POST /register { username, password, email }
+{
+    "error": {
+        "errors": [
+            {
+                "instance": {
+                    "email": "wenqi@gmail.cm2",
+                    "username": "wenqi"
+                },
+                "message": "email must be unique",
+                "origin": "DB",
+                "path": "email",
+                "type": "unique violation",
+                "validatorArgs": [],
+                "validatorKey": "not_unique",
+                "validatorName": null,
+                "value": "wenqi@gmail.cm2"
+            }
+        ],
+        "fields": {
+            "email": "wenqi@gmail.cm2"
+        },
+        "name": "SequelizeUniqueConstraintError",
+        "original": {
+            "code": "ER_DUP_ENTRY",
+            "errno": 1062,
+            "parameters": [
+                "wenqi",
+                "wenqi@gmail.cm2"
+            ],
+            "sql": "INSERT INTO `passenger` (`username`,`email`) VALUES (?,?);",
+            "sqlMessage": "Duplicate entry 'wenqi@gmail.cm2' for key 'email'",
+            "sqlState": "23000"
+        },
+        "parent": {
+            "code": "ER_DUP_ENTRY",
+            "errno": 1062,
+            "parameters": [
+                "wenqi",
+                "wenqi@gmail.cm2"
+            ],
+            "sql": "INSERT INTO `passenger` (`username`,`email`) VALUES (?,?);",
+            "sqlMessage": "Duplicate entry 'wenqi@gmail.cm2' for key 'email'",
+            "sqlState": "23000"
+        },
+        "sql": "INSERT INTO `passenger` (`username`,`email`) VALUES (?,?);"
+    },
+    "success": false
+}
+{
+    "success": true,
+    "userType": "PASSENGER"
+}
+
+GET /cards
+[
+    {
+        "belongsTo": "kellis",
+        "breezecardNum": "0475861680208144",
+        "value": "200.00"
+    },
+    {
+        "belongsTo": "ignacio.john",
+        "breezecardNum": "0524807425551662",
+        "value": "59.50"
+    },
+    {
+        "belongsTo": "commuter14",
+        "breezecardNum": "0919948381768459",
+        "value": "126.50"
+    },
+    {
+        "belongsTo": "kellis",
+        "breezecardNum": "1325138309325420",
+        "value": "97.00"
+    },
+    {
+        "belongsTo": "busrider73",
+        "breezecardNum": "1788613719481390",
+        "value": "127.00"
+    },
+    {
+        "belongsTo": "commuter14",
+        "breezecardNum": "2006517782865770",
+        "value": "127.25"
+    },
+    {
+        "belongsTo": "commuter14",
+        "breezecardNum": "2275718423410130",
+        "value": "143.25"
+    },
+    {
+        "belongsTo": "commuter14",
+        "breezecardNum": "2286669536044610",
+        "value": "0.50"
+    },
+    {
+        "belongsTo": "commuter14",
+        "breezecardNum": "2613198031233340",
+        "value": "45.00"
+    },
+    {
+        "belongsTo": "sandrapatel",
+        "breezecardNum": "2792083965359460",
+        "value": "20.00"
+    },
+    {
+        "belongsTo": "commuter14",
+        "breezecardNum": "3590098235166490",
+        "value": "16.25"
+    },
+    {
+        "belongsTo": "sandrapatel",
+        "breezecardNum": "4769432303280540",
+        "value": "68.50"
+    },
+    {
+        "belongsTo": "commuter14",
+        "breezecardNum": "4792323707679860",
+        "value": "34.00"
+    },
+    {
+        "belongsTo": "sandrapatel",
+        "breezecardNum": "4902965887533820",
+        "value": "79.75"
+    },
+    {
+        "belongsTo": "commuter14",
+        "breezecardNum": "5943709678229760",
+        "value": "133.50"
+    },
+    {
+        "belongsTo": "ashton.woods",
+        "breezecardNum": "6411414737900960",
+        "value": "41.00"
+    },
+    {
+        "belongsTo": "commuter14",
+        "breezecardNum": "6424673176102560",
+        "value": "27.00"
+    },
+    {
+        "belongsTo": "busrider73",
+        "breezecardNum": "6603808416168570",
+        "value": "41.50"
+    },
+    {
+        "belongsTo": "sandrapatel",
+        "breezecardNum": "7301442590825470",
+        "value": "6.00"
+    },
+    {
+        "belongsTo": "adinozzo",
+        "breezecardNum": "7534785562588930",
+        "value": "75.50"
+    },
+    {
+        "belongsTo": "riyoy1996",
+        "breezecardNum": "7792685035977770",
+        "value": "80.25"
+    },
+    {
+        "belongsTo": "sandrapatel",
+        "breezecardNum": "8753075721740010",
+        "value": "110.00"
+    },
+    {
+        "belongsTo": "busrider73",
+        "breezecardNum": "8802558078528210",
+        "value": "42.25"
+    },
+    {
+        "belongsTo": "kellis",
+        "breezecardNum": "9286930794479390",
+        "value": "116.25"
+    },
+    {
+        "belongsTo": "busrider73",
+        "breezecardNum": "9712526903816770",
+        "value": "68.50"
+    }
+]
+
+PUT /cards/:id { value, username }
+{
+    "success": true
+}
+
+DELETE /cards/:id (no username)
+{
+    "error": "Permission denied",
+    "success": false
+}
+
+DELETE /cards/:id { username }
+{
+    "card": {
+        "belongsTo": null,
+        "breezecardNum": "9248324548250130",
+        "value": "12.75"
+    },
+    "error": "You don't own this card",
+    "success": false
+}
+
+GET /stations
+[
+    {
+        "closedStatus": 0,
+        "enterFare": 2,
+        "intersection": "North Point Pkwy",
+        "isTrain": 0,
+        "name": "Old Milton Pkwy - North Point Pkwy",
+        "stopID": 31955
+    },
+    {
+        "closedStatus": 1,
+        "enterFare": 2,
+        "intersection": "Park Bridge Pkwy",
+        "isTrain": 0,
+        "name": "Old Milton Pkwy - Park Bridge Pkwy",
+        "stopID": 35161
+    },
+    {
+        "closedStatus": 0,
+        "enterFare": 2,
+        "intersection": "Commerce Pkwy",
+        "isTrain": 0,
+        "name": "Alpharetta Hwy - Commerce Pkwy",
+        "stopID": 46612
+    },
+    {
+        "closedStatus": 0,
+        "enterFare": 2,
+        "intersection": "Haynes Bridge Pkwy",
+        "isTrain": 0,
+        "name": "Old Milton Pkwy - Haynes Bridge Pkwy",
+        "stopID": 95834
+    },
+    {
+        "closedStatus": 0,
+        "enterFare": 4,
+        "intersection": null,
+        "isTrain": 0,
+        "name": "Georgia Dome Bus Station",
+        "stopID": "BUSDOME"
+    },
+    {
+        "closedStatus": 1,
+        "enterFare": 28.3,
+        "intersection": "Peachtree-Dunwoody Road",
+        "isTrain": 0,
+        "name": "North Springs",
+        "stopID": "BUSN11"
+    },
+    {
+        "closedStatus": 0,
+        "enterFare": 25.8,
+        "intersection": "hahahaha",
+        "isTrain": 0,
+        "name": "Midtown",
+        "stopID": "BUSN4"
+    },
+    {
+        "closedStatus": 0,
+        "enterFare": 2.5,
+        "intersection": null,
+        "isTrain": 0,
+        "name": "West End",
+        "stopID": "BUSS2"
+    },
+    {
+        "closedStatus": 0,
+        "enterFare": 2.5,
+        "intersection": null,
+        "isTrain": 1,
+        "name": "Georgia State",
+        "stopID": "E1"
+    },
+    {
+        "closedStatus": 0,
+        "enterFare": 2.5,
+        "intersection": null,
+        "isTrain": 1,
+        "name": "King Memorial",
+        "stopID": "E2"
+    },
+    {
+        "closedStatus": 0,
+        "enterFare": 2.5,
+        "intersection": null,
+        "isTrain": 1,
+        "name": "Inman Park/Reynolds Town",
+        "stopID": "E3"
+    },
+    {
+        "closedStatus": 0,
+        "enterFare": 2.5,
+        "intersection": null,
+        "isTrain": 1,
+        "name": "Edgewood/Candler Park",
+        "stopID": "E4"
+    },
+    {
+        "closedStatus": 0,
+        "enterFare": 3,
+        "intersection": null,
+        "isTrain": 1,
+        "name": "East Lake",
+        "stopID": "E5"
+    },
+    {
+        "closedStatus": 0,
+        "enterFare": 2.5,
+        "intersection": null,
+        "isTrain": 1,
+        "name": "Decatur",
+        "stopID": "E6"
+    },
+    {
+        "closedStatus": 0,
+        "enterFare": 2.5,
+        "intersection": null,
+        "isTrain": 1,
+        "name": "Avondale",
+        "stopID": "E7"
+    },
+    {
+        "closedStatus": 0,
+        "enterFare": 3,
+        "intersection": null,
+        "isTrain": 1,
+        "name": "Kensington",
+        "stopID": "E8"
+    },
+    {
+        "closedStatus": 0,
+        "enterFare": 2.5,
+        "intersection": null,
+        "isTrain": 1,
+        "name": "Indian Creek",
+        "stopID": "E9"
+    },
+    {
+        "closedStatus": 0,
+        "enterFare": 8,
+        "intersection": null,
+        "isTrain": 1,
+        "name": "Five Points",
+        "stopID": "FP"
+    },
+    {
+        "closedStatus": 0,
+        "enterFare": 6,
+        "intersection": null,
+        "isTrain": 1,
+        "name": "Peachtree Center",
+        "stopID": "N1"
+    },
+    {
+        "closedStatus": 0,
+        "enterFare": 2,
+        "intersection": null,
+        "isTrain": 1,
+        "name": "Sandy Springs",
+        "stopID": "N10"
+    },
+    {
+        "closedStatus": 0,
+        "enterFare": 2.5,
+        "intersection": null,
+        "isTrain": 1,
+        "name": "North Springs",
+        "stopID": "N11"
+    },
+    {
+        "closedStatus": 0,
+        "enterFare": 4,
+        "intersection": null,
+        "isTrain": 1,
+        "name": "Civic Center",
+        "stopID": "N2"
+    },
+    {
+        "closedStatus": 0,
+        "enterFare": 3,
+        "intersection": null,
+        "isTrain": 1,
+        "name": "North Avenue",
+        "stopID": "N3"
+    },
+    {
+        "closedStatus": 0,
+        "enterFare": 5,
+        "intersection": null,
+        "isTrain": 1,
+        "name": "Midtown",
+        "stopID": "N4"
+    },
+    {
+        "closedStatus": 0,
+        "enterFare": 4,
+        "intersection": null,
+        "isTrain": 1,
+        "name": "Arts Center",
+        "stopID": "N5"
+    },
+    {
+        "closedStatus": 0,
+        "enterFare": 2,
+        "intersection": null,
+        "isTrain": 1,
+        "name": "Lindbergh Center",
+        "stopID": "N6"
+    },
+    {
+        "closedStatus": 0,
+        "enterFare": 1,
+        "intersection": null,
+        "isTrain": 1,
+        "name": "Buckhead",
+        "stopID": "N7"
+    },
+    {
+        "closedStatus": 0,
+        "enterFare": 4,
+        "intersection": null,
+        "isTrain": 1,
+        "name": "Medical Center",
+        "stopID": "N8"
+    },
+    {
+        "closedStatus": 0,
+        "enterFare": 3,
+        "intersection": null,
+        "isTrain": 1,
+        "name": "Dunwoody",
+        "stopID": "N9"
+    },
+    {
+        "closedStatus": 1,
+        "enterFare": 1,
+        "intersection": null,
+        "isTrain": 1,
+        "name": "Bankhead",
+        "stopID": "P4"
+    },
+    {
+        "closedStatus": 0,
+        "enterFare": 10,
+        "intersection": null,
+        "isTrain": 1,
+        "name": "Garnett",
+        "stopID": "S1"
+    },
+    {
+        "closedStatus": 0,
+        "enterFare": 25,
+        "intersection": null,
+        "isTrain": 1,
+        "name": "West End",
+        "stopID": "S2"
+    },
+    {
+        "closedStatus": 0,
+        "enterFare": 5,
+        "intersection": null,
+        "isTrain": 1,
+        "name": "Oakland City",
+        "stopID": "S3"
+    },
+    {
+        "closedStatus": 1,
+        "enterFare": 2.5,
+        "intersection": null,
+        "isTrain": 1,
+        "name": "Lakewood/Ft. McPherson",
+        "stopID": "S4"
+    },
+    {
+        "closedStatus": 0,
+        "enterFare": 2.5,
+        "intersection": null,
+        "isTrain": 1,
+        "name": "East Point",
+        "stopID": "S5"
+    },
+    {
+        "closedStatus": 0,
+        "enterFare": 2.5,
+        "intersection": null,
+        "isTrain": 1,
+        "name": "College Park",
+        "stopID": "S6"
+    },
+    {
+        "closedStatus": 0,
+        "enterFare": 2.5,
+        "intersection": null,
+        "isTrain": 1,
+        "name": "Atlanta Airport",
+        "stopID": "S7"
+    },
+    {
+        "closedStatus": 0,
+        "enterFare": 2.5,
+        "intersection": null,
+        "isTrain": 1,
+        "name": "Vine City",
+        "stopID": "W2"
+    },
+    {
+        "closedStatus": 0,
+        "enterFare": 2.5,
+        "intersection": null,
+        "isTrain": 1,
+        "name": "Ashby",
+        "stopID": "W3"
+    },
+    {
+        "closedStatus": 0,
+        "enterFare": 2.5,
+        "intersection": null,
+        "isTrain": 1,
+        "name": "West Lake",
+        "stopID": "W4"
+    },
+    {
+        "closedStatus": 1,
+        "enterFare": 2.5,
+        "intersection": null,
+        "isTrain": 1,
+        "name": "Hamilton E. Holmes",
+        "stopID": "W5"
+    }
+]
+
+GET /conflicts?attr=<name>&order=(asc|desc)
+[
+    {
+        "belongsTo": "sandrapatel",
+        "breezecardNum": 4769432303280540,
+        "dateTime": 1508790109000,
+        "username": "kellis"
+    },
+    {
+        "belongsTo": "sandrapatel",
+        "breezecardNum": 4769432303280540,
+        "dateTime": 1508844672000,
+        "username": "riyoy1996"
+    },
+    {
+        "belongsTo": "kellis",
+        "breezecardNum": 475861680208144,
+        "dateTime": 1541998801000,
+        "username": "sandrapatel"
+    }
+]
+
+POST /conflicts { username, breezecardNum }
+{
+    "error": "Cannot asign to a thrid person",
+    "success": false
+}
+
+GET /trips[?startTime=<TIMESTAMP>[&endTime=startTime=<TIMESTAMP>]]>
+GET /trips[?username=<username>]
+[
+    {
+        "belongsTo": "adinozzo",
+        "breezecardNum": 7534785562588930,
+        "endStation": "Georgia Dome Bus Station",
+        "passenger": "anthony.dinozzo@ncis.mil.gov",
+        "startStation": "West End",
+        "startTime": 1507608000000,
+        "tripFare": 1.5,
+        "value": 75.5
+    },
+    {
+        "belongsTo": "sandrapatel",
+        "breezecardNum": 7301442590825470,
+        "endStation": "Atlanta Airport",
+        "passenger": "sandra74@jourrapide.com",
+        "startStation": "Midtown",
+        "startTime": 1509093090000,
+        "tripFare": 9,
+        "value": 6
+    },
+    {
+        "belongsTo": "sandrapatel",
+        "breezecardNum": 8753075721740010,
+        "endStation": "Midtown",
+        "passenger": "sandra74@jourrapide.com",
+        "startStation": "North Avenue",
+        "startTime": 1509111611000,
+        "tripFare": 1,
+        "value": 110
+    },
+    {
+        "belongsTo": "ashton.woods",
+        "breezecardNum": 6411414737900960,
+        "endStation": "Midtown",
+        "passenger": "awoods30@gatech.edu",
+        "startStation": "North Springs",
+        "startTime": 1509244210000,
+        "tripFare": 3.5,
+        "value": 41
+    },
+    {
+        "belongsTo": "kellis",
+        "breezecardNum": 1325138309325420,
+        "endStation": null,
+        "passenger": "kateellis@gatech.edu",
+        "startStation": "Five Points",
+        "startTime": 1509499800000,
+        "tripFare": 1,
+        "value": 97
+    },
+    {
+        "belongsTo": "riyoy1996",
+        "breezecardNum": 7792685035977770,
+        "endStation": "North Avenue",
+        "passenger": "yamada.riyo@navy.mil.gov",
+        "startStation": "Georgia State",
+        "startTime": 1509503470000,
+        "tripFare": 3.5,
+        "value": 80.25
+    },
+    {
+        "belongsTo": "ignacio.john",
+        "breezecardNum": 524807425551662,
+        "endStation": "Midtown",
+        "passenger": "john@iconsulting.com",
+        "startStation": "Atlanta Airport",
+        "startTime": 1509503590000,
+        "tripFare": 2,
+        "value": 59.5
+    },
+    {
+        "belongsTo": "busrider73",
+        "breezecardNum": 1788613719481390,
+        "endStation": "North Springs",
+        "passenger": "lena.wexler@dayrep.com",
+        "startStation": "Georgia Dome Bus Station",
+        "startTime": 1509642671000,
+        "tripFare": 10.5,
+        "value": 127
+    },
+    {
+        "belongsTo": "sandrapatel",
+        "breezecardNum": 2792083965359460,
+        "endStation": "Alpharetta Hwy - Commerce Pkwy",
+        "passenger": "sandra74@jourrapide.com",
+        "startStation": "Old Milton Pkwy - North Point Pkwy",
+        "startTime": 1509642671000,
+        "tripFare": 4,
+        "value": 20
+    },
+    {
+        "belongsTo": "ignacio.john",
+        "breezecardNum": 524807425551662,
+        "endStation": "North Springs",
+        "passenger": "john@iconsulting.com",
+        "startStation": "Midtown",
+        "startTime": 1509716651000,
+        "tripFare": 1.5,
+        "value": 59.5
+    },
+    {
+        "belongsTo": "ignacio.john",
+        "breezecardNum": 524807425551662,
+        "endStation": "Midtown",
+        "passenger": "john@iconsulting.com",
+        "startStation": "North Springs",
+        "startTime": 1509916909000,
+        "tripFare": 2.75,
+        "value": 59.5
+    },
+    {
+        "belongsTo": "adinozzo",
+        "breezecardNum": 7534785562588930,
+        "endStation": "Georgia Dome Bus Station",
+        "passenger": "anthony.dinozzo@ncis.mil.gov",
+        "startStation": "Five Points",
+        "startTime": 1543622400000,
+        "tripFare": 10,
+        "value": 75.5
+    }
+]
+[
+    {
+        "belongsTo": "busrider73",
+        "breezecardNum": 1788613719481390,
+        "endStation": "North Springs",
+        "passenger": "lena.wexler@dayrep.com",
+        "startStation": "Georgia Dome Bus Station",
+        "startTime": 1509642671000,
+        "tripFare": 10.5,
+        "value": 127
+    },
+    {
+        "belongsTo": "sandrapatel",
+        "breezecardNum": 2792083965359460,
+        "endStation": "Alpharetta Hwy - Commerce Pkwy",
+        "passenger": "sandra74@jourrapide.com",
+        "startStation": "Old Milton Pkwy - North Point Pkwy",
+        "startTime": 1509642671000,
+        "tripFare": 4,
+        "value": 20
+    },
+    {
+        "belongsTo": "ignacio.john",
+        "breezecardNum": 524807425551662,
+        "endStation": "North Springs",
+        "passenger": "john@iconsulting.com",
+        "startStation": "Midtown",
+        "startTime": 1509716651000,
+        "tripFare": 1.5,
+        "value": 59.5
+    },
+    {
+        "belongsTo": "ignacio.john",
+        "breezecardNum": 524807425551662,
+        "endStation": "Midtown",
+        "passenger": "john@iconsulting.com",
+        "startStation": "North Springs",
+        "startTime": 1509916909000,
+        "tripFare": 2.75,
+        "value": 59.5
+    },
+    {
+        "belongsTo": "adinozzo",
+        "breezecardNum": 7534785562588930,
+        "endStation": "Georgia Dome Bus Station",
+        "passenger": "anthony.dinozzo@ncis.mil.gov",
+        "startStation": "Five Points",
+        "startTime": 1543622400000,
+        "tripFare": 10,
+        "value": 75.5
+    }
+]
+[
+    {
+        "belongsTo": "adinozzo",
+        "breezecardNum": 7534785562588930,
+        "endStation": "Georgia Dome Bus Station",
+        "passenger": "anthony.dinozzo@ncis.mil.gov",
+        "startStation": "West End",
+        "startTime": 1507608000000,
+        "tripFare": 1.5,
+        "value": 75.5
+    },
+    {
+        "belongsTo": "sandrapatel",
+        "breezecardNum": 7301442590825470,
+        "endStation": "Atlanta Airport",
+        "passenger": "sandra74@jourrapide.com",
+        "startStation": "Midtown",
+        "startTime": 1509093090000,
+        "tripFare": 9,
+        "value": 6
+    },
+    {
+        "belongsTo": "sandrapatel",
+        "breezecardNum": 8753075721740010,
+        "endStation": "Midtown",
+        "passenger": "sandra74@jourrapide.com",
+        "startStation": "North Avenue",
+        "startTime": 1509111611000,
+        "tripFare": 1,
+        "value": 110
+    },
+    {
+        "belongsTo": "ashton.woods",
+        "breezecardNum": 6411414737900960,
+        "endStation": "Midtown",
+        "passenger": "awoods30@gatech.edu",
+        "startStation": "North Springs",
+        "startTime": 1509244210000,
+        "tripFare": 3.5,
+        "value": 41
+    }
+]
+[
+    {
+        "belongsTo": "adinozzo",
+        "breezecardNum": 7534785562588930,
+        "endStation": "Georgia Dome Bus Station",
+        "passenger": "anthony.dinozzo@ncis.mil.gov",
+        "startStation": "West End",
+        "startTime": 1507608000000,
+        "tripFare": 1.5,
+        "value": 75.5
+    },
+    {
+        "belongsTo": "sandrapatel",
+        "breezecardNum": 7301442590825470,
+        "endStation": "Atlanta Airport",
+        "passenger": "sandra74@jourrapide.com",
+        "startStation": "Midtown",
+        "startTime": 1509093090000,
+        "tripFare": 9,
+        "value": 6
+    }
+]
+[
+    {
+        "belongsTo": "sandrapatel",
+        "breezecardNum": 7301442590825470,
+        "endStation": "Atlanta Airport",
+        "passenger": "sandra74@jourrapide.com",
+        "startStation": "Midtown",
+        "startTime": 1509093090000,
+        "tripFare": 9,
+        "value": 6
+    },
+    {
+        "belongsTo": "sandrapatel",
+        "breezecardNum": 8753075721740010,
+        "endStation": "Midtown",
+        "passenger": "sandra74@jourrapide.com",
+        "startStation": "North Avenue",
+        "startTime": 1509111611000,
+        "tripFare": 1,
+        "value": 110
+    },
+    {
+        "belongsTo": "sandrapatel",
+        "breezecardNum": 2792083965359460,
+        "endStation": "Alpharetta Hwy - Commerce Pkwy",
+        "passenger": "sandra74@jourrapide.com",
+        "startStation": "Old Milton Pkwy - North Point Pkwy",
+        "startTime": 1509642671000,
+        "tripFare": 4,
+        "value": 20
+    }
+]
+
+POST /trips (missing fields)
+{
+    "error": "Missing fields",
+    "success": false
+}
+POST /trips { breezecardNum, tripFare, startTime, startsAt, endsAt }
+{
+    "errors": [
+        {
+            "instance": {
+                "breezecardNum": "7534785562588930",
+                "endsAt": "BUSDOME",
+                "startTime": "2018-12-01 00:00:00",
+                "startsAt": "FP",
+                "tripFare": "10"
+            },
+            "message": "PRIMARY must be unique",
+            "origin": "DB",
+            "path": "PRIMARY",
+            "type": "unique violation",
+            "validatorArgs": [],
+            "validatorKey": "not_unique",
+            "validatorName": null,
+            "value": "2018-12-01 00:00:00-7534785562588930"
+        }
+    ],
+    "fields": {
+        "PRIMARY": "2018-12-01 00:00:00-7534785562588930"
+    },
+    "name": "SequelizeUniqueConstraintError",
+    "original": {
+        "code": "ER_DUP_ENTRY",
+        "errno": 1062,
+        "parameters": [
+            "10",
+            "2018-12-01 00:00:00",
+            "7534785562588930",
+            "FP",
+            "BUSDOME"
+        ],
+        "sql": "INSERT INTO `trip` (`tripFare`,`startTime`,`breezecardNum`,`startsAt`,`endsAt`) VALUES (?,?,?,?,?);",
+        "sqlMessage": "Duplicate entry '2018-12-01 00:00:00-7534785562588930' for key 'PRIMARY'",
+        "sqlState": "23000"
+    },
+    "parent": {
+        "code": "ER_DUP_ENTRY",
+        "errno": 1062,
+        "parameters": [
+            "10",
+            "2018-12-01 00:00:00",
+            "7534785562588930",
+            "FP",
+            "BUSDOME"
+        ],
+        "sql": "INSERT INTO `trip` (`tripFare`,`startTime`,`breezecardNum`,`startsAt`,`endsAt`) VALUES (?,?,?,?,?);",
+        "sqlMessage": "Duplicate entry '2018-12-01 00:00:00-7534785562588930' for key 'PRIMARY'",
+        "sqlState": "23000"
+    },
+    "sql": "INSERT INTO `trip` (`tripFare`,`startTime`,`breezecardNum`,`startsAt`,`endsAt`) VALUES (?,?,?,?,?);"
+}
+
+GET /stations
+[
+    {
+        "closedStatus": 0,
+        "enterFare": 2,
+        "intersection": "North Point Pkwy",
+        "isTrain": 0,
+        "name": "Old Milton Pkwy - North Point Pkwy",
+        "stopID": 31955
+    },
+    {
+        "closedStatus": 1,
+        "enterFare": 2,
+        "intersection": "Park Bridge Pkwy",
+        "isTrain": 0,
+        "name": "Old Milton Pkwy - Park Bridge Pkwy",
+        "stopID": 35161
+    },
+    {
+        "closedStatus": 0,
+        "enterFare": 2,
+        "intersection": "Commerce Pkwy",
+        "isTrain": 0,
+        "name": "Alpharetta Hwy - Commerce Pkwy",
+        "stopID": 46612
+    },
+    {
+        "closedStatus": 0,
+        "enterFare": 2,
+        "intersection": "Haynes Bridge Pkwy",
+        "isTrain": 0,
+        "name": "Old Milton Pkwy - Haynes Bridge Pkwy",
+        "stopID": 95834
+    },
+    {
+        "closedStatus": 0,
+        "enterFare": 4,
+        "intersection": null,
+        "isTrain": 0,
+        "name": "Georgia Dome Bus Station",
+        "stopID": "BUSDOME"
+    },
+    {
+        "closedStatus": 1,
+        "enterFare": 28.3,
+        "intersection": "Peachtree-Dunwoody Road",
+        "isTrain": 0,
+        "name": "North Springs",
+        "stopID": "BUSN11"
+    },
+    {
+        "closedStatus": 0,
+        "enterFare": 25.8,
+        "intersection": "hahahaha",
+        "isTrain": 0,
+        "name": "Midtown",
+        "stopID": "BUSN4"
+    },
+    {
+        "closedStatus": 0,
+        "enterFare": 2.5,
+        "intersection": null,
+        "isTrain": 0,
+        "name": "West End",
+        "stopID": "BUSS2"
+    },
+    {
+        "closedStatus": 0,
+        "enterFare": 2.5,
+        "intersection": null,
+        "isTrain": 1,
+        "name": "Georgia State",
+        "stopID": "E1"
+    },
+    {
+        "closedStatus": 0,
+        "enterFare": 2.5,
+        "intersection": null,
+        "isTrain": 1,
+        "name": "King Memorial",
+        "stopID": "E2"
+    },
+    {
+        "closedStatus": 0,
+        "enterFare": 2.5,
+        "intersection": null,
+        "isTrain": 1,
+        "name": "Inman Park/Reynolds Town",
+        "stopID": "E3"
+    },
+    {
+        "closedStatus": 0,
+        "enterFare": 2.5,
+        "intersection": null,
+        "isTrain": 1,
+        "name": "Edgewood/Candler Park",
+        "stopID": "E4"
+    },
+    {
+        "closedStatus": 0,
+        "enterFare": 3,
+        "intersection": null,
+        "isTrain": 1,
+        "name": "East Lake",
+        "stopID": "E5"
+    },
+    {
+        "closedStatus": 0,
+        "enterFare": 2.5,
+        "intersection": null,
+        "isTrain": 1,
+        "name": "Decatur",
+        "stopID": "E6"
+    },
+    {
+        "closedStatus": 0,
+        "enterFare": 2.5,
+        "intersection": null,
+        "isTrain": 1,
+        "name": "Avondale",
+        "stopID": "E7"
+    },
+    {
+        "closedStatus": 0,
+        "enterFare": 3,
+        "intersection": null,
+        "isTrain": 1,
+        "name": "Kensington",
+        "stopID": "E8"
+    },
+    {
+        "closedStatus": 0,
+        "enterFare": 2.5,
+        "intersection": null,
+        "isTrain": 1,
+        "name": "Indian Creek",
+        "stopID": "E9"
+    },
+    {
+        "closedStatus": 0,
+        "enterFare": 8,
+        "intersection": null,
+        "isTrain": 1,
+        "name": "Five Points",
+        "stopID": "FP"
+    },
+    {
+        "closedStatus": 0,
+        "enterFare": 6,
+        "intersection": null,
+        "isTrain": 1,
+        "name": "Peachtree Center",
+        "stopID": "N1"
+    },
+    {
+        "closedStatus": 0,
+        "enterFare": 2,
+        "intersection": null,
+        "isTrain": 1,
+        "name": "Sandy Springs",
+        "stopID": "N10"
+    },
+    {
+        "closedStatus": 0,
+        "enterFare": 2.5,
+        "intersection": null,
+        "isTrain": 1,
+        "name": "North Springs",
+        "stopID": "N11"
+    },
+    {
+        "closedStatus": 0,
+        "enterFare": 4,
+        "intersection": null,
+        "isTrain": 1,
+        "name": "Civic Center",
+        "stopID": "N2"
+    },
+    {
+        "closedStatus": 0,
+        "enterFare": 3,
+        "intersection": null,
+        "isTrain": 1,
+        "name": "North Avenue",
+        "stopID": "N3"
+    },
+    {
+        "closedStatus": 0,
+        "enterFare": 5,
+        "intersection": null,
+        "isTrain": 1,
+        "name": "Midtown",
+        "stopID": "N4"
+    },
+    {
+        "closedStatus": 0,
+        "enterFare": 4,
+        "intersection": null,
+        "isTrain": 1,
+        "name": "Arts Center",
+        "stopID": "N5"
+    },
+    {
+        "closedStatus": 0,
+        "enterFare": 2,
+        "intersection": null,
+        "isTrain": 1,
+        "name": "Lindbergh Center",
+        "stopID": "N6"
+    },
+    {
+        "closedStatus": 0,
+        "enterFare": 1,
+        "intersection": null,
+        "isTrain": 1,
+        "name": "Buckhead",
+        "stopID": "N7"
+    },
+    {
+        "closedStatus": 0,
+        "enterFare": 4,
+        "intersection": null,
+        "isTrain": 1,
+        "name": "Medical Center",
+        "stopID": "N8"
+    },
+    {
+        "closedStatus": 0,
+        "enterFare": 3,
+        "intersection": null,
+        "isTrain": 1,
+        "name": "Dunwoody",
+        "stopID": "N9"
+    },
+    {
+        "closedStatus": 1,
+        "enterFare": 1,
+        "intersection": null,
+        "isTrain": 1,
+        "name": "Bankhead",
+        "stopID": "P4"
+    },
+    {
+        "closedStatus": 0,
+        "enterFare": 10,
+        "intersection": null,
+        "isTrain": 1,
+        "name": "Garnett",
+        "stopID": "S1"
+    },
+    {
+        "closedStatus": 0,
+        "enterFare": 25,
+        "intersection": null,
+        "isTrain": 1,
+        "name": "West End",
+        "stopID": "S2"
+    },
+    {
+        "closedStatus": 0,
+        "enterFare": 5,
+        "intersection": null,
+        "isTrain": 1,
+        "name": "Oakland City",
+        "stopID": "S3"
+    },
+    {
+        "closedStatus": 1,
+        "enterFare": 2.5,
+        "intersection": null,
+        "isTrain": 1,
+        "name": "Lakewood/Ft. McPherson",
+        "stopID": "S4"
+    },
+    {
+        "closedStatus": 0,
+        "enterFare": 2.5,
+        "intersection": null,
+        "isTrain": 1,
+        "name": "East Point",
+        "stopID": "S5"
+    },
+    {
+        "closedStatus": 0,
+        "enterFare": 2.5,
+        "intersection": null,
+        "isTrain": 1,
+        "name": "College Park",
+        "stopID": "S6"
+    },
+    {
+        "closedStatus": 0,
+        "enterFare": 2.5,
+        "intersection": null,
+        "isTrain": 1,
+        "name": "Atlanta Airport",
+        "stopID": "S7"
+    },
+    {
+        "closedStatus": 0,
+        "enterFare": 2.5,
+        "intersection": null,
+        "isTrain": 1,
+        "name": "Vine City",
+        "stopID": "W2"
+    },
+    {
+        "closedStatus": 0,
+        "enterFare": 2.5,
+        "intersection": null,
+        "isTrain": 1,
+        "name": "Ashby",
+        "stopID": "W3"
+    },
+    {
+        "closedStatus": 0,
+        "enterFare": 2.5,
+        "intersection": null,
+        "isTrain": 1,
+        "name": "West Lake",
+        "stopID": "W4"
+    },
+    {
+        "closedStatus": 1,
+        "enterFare": 2.5,
+        "intersection": null,
+        "isTrain": 1,
+        "name": "Hamilton E. Holmes",
+        "stopID": "W5"
+    }
+]
+PUT /stations/:id (no body)
+{
+    "error": "No update needed"
+}
+PUT /stations/:id { enterFare?, closedStatus?, isTrain?, intersection? }
+{
+    "success": true
+}
+{
+    "success": true
+}
+
+GET /report[?minStartTime=<TIMESTAMP>&maxStartTime=<TIMESTAMP>]
+[
+    {
+        "flow": 1,
+        "inFlow": 1,
+        "name": "Old Milton Pkwy - North Point Pkwy",
+        "outFlow": 0,
+        "revenue": "4.00"
+    },
+    {
+        "flow": -1,
+        "inFlow": 1,
+        "name": "Georgia Dome Bus Station",
+        "outFlow": 2,
+        "revenue": "10.50"
+    },
+    {
+        "flow": 1,
+        "inFlow": 1,
+        "name": "West End",
+        "outFlow": 0,
+        "revenue": "1.50"
+    },
+    {
+        "flow": 1,
+        "inFlow": 1,
+        "name": "Georgia State",
+        "outFlow": 0,
+        "revenue": "3.50"
+    },
+    {
+        "flow": 2,
+        "inFlow": 2,
+        "name": "Five Points",
+        "outFlow": 0,
+        "revenue": "11.00"
+    },
+    {
+        "flow": 0,
+        "inFlow": 2,
+        "name": "North Springs",
+        "outFlow": 2,
+        "revenue": "6.25"
+    },
+    {
+        "flow": 0,
+        "inFlow": 1,
+        "name": "North Avenue",
+        "outFlow": 1,
+        "revenue": "1.00"
+    },
+    {
+        "flow": -1,
+        "inFlow": 3,
+        "name": "Midtown",
+        "outFlow": 4,
+        "revenue": "12.00"
+    },
+    {
+        "flow": 0,
+        "inFlow": 1,
+        "name": "Atlanta Airport",
+        "outFlow": 1,
+        "revenue": "2.00"
+    }
+]
+[
+    {
+        "flow": 0,
+        "inFlow": 1,
+        "name": "North Springs",
+        "outFlow": 1,
+        "revenue": "2.75"
+    },
+    {
+        "flow": 0,
+        "inFlow": 1,
+        "name": "Midtown",
+        "outFlow": 1,
+        "revenue": "1.50"
+    }
+]
+[]
+
