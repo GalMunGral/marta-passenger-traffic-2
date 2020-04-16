@@ -7,7 +7,7 @@ sudo apt install mysql-server
 sudo /etc/init.d/mysql start
 ```
 ### IMPORTANT: Create new MySQL user (inside MySQL shell)
-```mysql
+```
 create user 'dev'@'localhost' identified by 'pass';
 grant all privileges on *.* to 'dev'@'localhost';
 flush privileges;
