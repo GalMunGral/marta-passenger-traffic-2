@@ -6,15 +6,17 @@ import Register from './pages/Register';
 import Passenger from './pages/Passenger';
 import Administrator from './pages/Administrator';
 
-
 Vue.use(VueRouter);
 
-export default new VueRouter({
+const router = new VueRouter({
   mode: 'history',
   routes: [
     { path: '/login', component: Login },
     { path: '/register', component: Register },
     { path: '/passenger', component: Passenger },
     { path: '/admin', component: Administrator },
+    { path: '/', redirect: '/login' },
   ]
 });
+
+export default router;

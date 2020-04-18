@@ -37,6 +37,17 @@ export default {
       toastTimestamp: '',
     }
   },
+  computed: {
+    isLoggedIn() {
+      return this.$store.getters.isLoggedIn;
+    },
+    currentPath() {
+      return this.$router.currentRoute.path;
+    },
+    authorizedPath() {
+      return this.$store.state.userType === 'ADMIN' ? '/admin' : '/passenger';
+    }
+  },
   methods: {
     showToast({ isError, message }) {
       this.toastMessage = message;
@@ -46,6 +57,15 @@ export default {
     },
     hideToast() {
       this.displayToast = false;
+    }
+  },
+  created() {
+    if (!this.isLoggedIn) {
+      if (this.currentPath !== '/login' && this.currentPath !== '/register') {
+        this.$router.replace('/login');
+      } 
+    } else if (this.currentPath !== this.authorizedPath) {
+      this.$router.replace(this.authorizedPath);
     }
   }
 }

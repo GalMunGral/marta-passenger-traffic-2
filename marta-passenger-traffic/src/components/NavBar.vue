@@ -7,7 +7,7 @@
         </div>
       </div>
     </div>
-    <div class="level-right">
+    <div v-if="isLoggedIn" class="level-right">
       <button class="button is-info" @click="logout">Log Out</button>
     </div>
 
@@ -16,11 +16,16 @@
 
 <script>
 export default {
+  computed: {
+    isLoggedIn() {
+      return this.$store.getters.isLoggedIn;
+    }
+  },
   methods: {
     logout() {
       this.$store.commit('reset');
       this.$router.push('/login');
     }
-  }  
+  }
 }
 </script>

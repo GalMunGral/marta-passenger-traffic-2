@@ -82,6 +82,12 @@ export default {
         });
       }
     }
+  },
+  beforeMount() {
+    if (this.$store.getters.isLoggedIn) {
+      const redirectPath = this.$store.state.userType === 'PASSENGER' ? '/passenger' : '/admin';
+      this.$router.replace(redirectPath);
+    }
   }
 }
 </script>

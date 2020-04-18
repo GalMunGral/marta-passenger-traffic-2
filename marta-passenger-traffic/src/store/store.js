@@ -11,9 +11,10 @@ export default new Vuex.Store({
     userType: window.localStorage.getItem('user-type'),
   },
   getters: {
+    isLoggedIn: (state) => state.accessToken && state.username && state.userType,
     client: (state) => axios.create({
       headers: { 'Authorization': 'Bearer ' + state.accessToken }
-    })
+    }),
   },
   mutations: {
     setUser: (state, { username, userType, accessToken }) => {
