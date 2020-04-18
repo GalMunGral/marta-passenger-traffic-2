@@ -43,8 +43,7 @@ router.get('/', async (req, res) => {
       raw: true
     });
   } catch(error) {
-    console.log(error)
-    return res.send(error)
+    return res.status(500).send(error)
   }
   trips = parseRawData(trips, attr, dir);
   res.send(JSON.stringify(trips))
@@ -60,7 +59,7 @@ router.post('/', async (req, res) => {
     endsAt
   } = req.body;
   if (!(breezecardNum && tripFare && startTime && startsAt && endsAt)) {
-    return res.send({ success: false, error: 'Missing fields'});
+    return res.status(500).send({ success: false, error: 'Missing fields'});
   }
   try {
     const card = await Breezecard.findOne({
@@ -82,7 +81,7 @@ router.post('/', async (req, res) => {
     })
     res.send({ success: true })
   } catch(error) {
-    return res.send(error)
+    return res.status(500).send(error)
   }
 });
 

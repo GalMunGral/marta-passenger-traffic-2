@@ -31,8 +31,7 @@ router.get('/', async (req, res) => {
   `).then(results => {
     res.send(JSON.stringify(results[0]));
   }).catch(error => {
-    console.log(error);
-    res.send({ error });
+    res.status(500).send({ error });
   })
 });
 

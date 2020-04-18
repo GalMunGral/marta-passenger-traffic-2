@@ -13,13 +13,13 @@ router.post('/', async (req, res) => {
   password = md5(password);
   
   if (!username) {
-    return res.send({ success: false, error: 'Username missing' })
+    return res.status(500).send({ success: false, error: 'Username missing' })
   }
   if (!password) {
-    return res.send({ success: false, error: 'Password missing'})
+    return res.status(500).send({ success: false, error: 'Password missing'})
   }
   if (!email) {
-    return res.send({ success: false, error: 'Email missing' })
+    return res.status(500).send({ success: false, error: 'Email missing' })
   }
  
   // Create user account
@@ -36,7 +36,7 @@ router.post('/', async (req, res) => {
       });
     }
   } catch(error) {
-    return res.send({ success: false, error });
+    return res.status(500).send({ success: false, error });
   }
   
   // Create passenger
@@ -47,13 +47,18 @@ router.post('/', async (req, res) => {
     if (passenger) throw 'Account already exists';
     await Passenger.create({ username, email });
   } catch(error) {
-    return res.send({ success: false, error });
+    return res.status(500).send({ success: false, error });
   }
 
   // If no card# is provided
   if (!breezecardNum) {
     breezecardNum = generateCardNumber();
-    await Breezecard.create({ breezecardNum, value: 0, username});
+    console.log('NEW CARD: ', breezecardNum);
+    await Breezecard.create({
+      breezecardNum,
+      value: 100,
+      belongsTo: username
+    });
   } else {
 
     // Check if the card is already created
@@ -64,7 +69,7 @@ router.post('/', async (req, res) => {
       // It's a new card
       await Breezecard.create({
         breezecardNum,
-        value: 0,
+        value: 100,
         username
       });
     } else if (!card.belongsTo) {
@@ -83,9 +88,10 @@ router.post('/', async (req, res) => {
       });
       // Get a random card
       const breezecardNum = generateCardNumber();
+      console.log('NEW CARD: ', breezecardNum);
       Breezecard.create({
         breezecardNum,
-        value: 0,
+        value: 100,
         username
       });
     }

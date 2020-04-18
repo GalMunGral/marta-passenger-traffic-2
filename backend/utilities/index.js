@@ -1,6 +1,6 @@
 const _ = require('lodash');
 
-const parseRawData = (vals, attr, order)  => {
+const parseRawData = (vals, attr='startTime', order='desc')  => {
   let unordered = vals.map(v => {
     return _.mapValues(v, (o) => {
       return o && !isNaN(o) ?  Number(o): o
@@ -8,15 +8,10 @@ const parseRawData = (vals, attr, order)  => {
   }).map(v => _.mapKeys(v, (o, k) => {
     return  k.includes('.') ? _.split(k, '.')[1] : k;
   }));
-  if (attr && order) {
-    return _.orderBy(unordered, attr, order)
-  }
-  return unordered;
+  return _.orderBy(unordered, [attr], [order]);
 }
 
-const generateCardNumber = () => (
-  Math.floor(Math.random() * Math.pow(10, 16))
-);
+const generateCardNumber = () => String(Math.floor(Math.random() * Math.pow(10, 16)));
 
 module.exports = {
   parseRawData,

@@ -46,7 +46,7 @@ router.post('/', async (req, res) => {
     }
     res.send({ success: true })
   } catch(error) {
-    res.send(error);
+    res.status(500).send(error);
   }
 });
 
@@ -80,8 +80,7 @@ router.put('/:stopId', async (req, res) => {
     }
     res.send({ success: true })
   } catch(error) {
-    console.log(error)
-    res.send({ error });
+    res.status(500).send({ error });
   }
 });
 

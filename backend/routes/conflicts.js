@@ -18,17 +18,17 @@ router.get('/', async (req, res) => {
     conflicts = parseRawData(conflicts, attr, order);
     return res.send(conflicts);
   } catch(error) {
-    return res.send(error);
+    return res.status(500).send(error);
   }
 });
 
 router.post('/', async (req, res) => {
   const { username, breezecardNum } = req.body;
   if (!username) {
-    return res.send({ success: false, error: 'Username missing' });
+    return res.status(500).send({ success: false, error: 'Username missing' });
   }
   if (!breezecardNum) {
-    return res.send({ success: false, error: 'Card number missing' });
+    return res.status(500).send({ success: false, error: 'Card number missing' });
   }
   let conflicts;
   try{
@@ -58,8 +58,7 @@ router.post('/', async (req, res) => {
     });
     return res.send({ success: true });
   } catch(error) {
-    console.log(error);
-    return res.send({ success: false, error });
+    return res.status(500).send({ success: false, error });
   }
 });
 
