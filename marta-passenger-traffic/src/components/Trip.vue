@@ -169,7 +169,7 @@ export default {
   },
   created() {
     this.loadStationData();
-  },
+  }
 }
 </script>
 
