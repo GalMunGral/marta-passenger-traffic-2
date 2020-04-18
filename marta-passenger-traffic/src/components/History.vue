@@ -1,8 +1,8 @@
 <template>
-  <div class="column is-three-quarters">
+  <div class="column is-two-thirds">
     <h1 class="title is-1">Trip History</h1>
-    <section class="scrollable" :class="[loading ? 'blur' : '']">
       <div class="card">
+      <section class="scrollable" :class="[loading ? 'blur' : '']">
         <div class="card-content">
           <table class="table is-striped is-fullwidth">
             <thead>
@@ -25,8 +25,8 @@
             </tbody>
           </table>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
   </div>
 </template>
 
@@ -71,15 +71,11 @@ export default {
   .scrollable {
     height: 60vh;
     overflow-y: scroll;
-    padding: 2rem;
-    background-color: #eeeeee;
-    box-shadow: inset 0 0 10px lightgray;
     transition: all 0.5s ease-out;
   }
-  table {
-    position: relative;
-    z-index: 0;
-  }
+  .scrollable::-webkit-scrollbar {
+    display: none;
+  } 
   td {
     font-family: monospace;
   }

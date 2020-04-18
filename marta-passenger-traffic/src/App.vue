@@ -78,10 +78,14 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
+  overflow-y: scroll;
   -webkit-user-select: none;  /* Chrome all / Safari all */
   -moz-user-select: none;     /* Firefox all */
   -ms-user-select: none;      /* IE 10+ */
   user-select: none;          /* Likely future */
+}
+body::-webkit-scrollbar {
+  display: none;
 }
 .toast-enter-active {
   transition: transform 0.2s ease-out;
